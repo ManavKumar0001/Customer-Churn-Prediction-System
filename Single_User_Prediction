@@ -1,0 +1,48 @@
+import pandas as pd
+import joblib
+
+
+# -------------------------------
+# Load trained model
+# -------------------------------
+model = joblib.load("churn_model.pkl")
+
+# -------------------------------
+# Take terminal input for ONE user
+# -------------------------------
+print("\n\n\n--- Customer Churn Prediction System ---\n")
+customer_id = int(input("Enter Customer ID: "))
+age = int(input("Enter Age: "))
+tenure = int(input("Enter Tenure: "))
+monthly_charges = float(input("Enter Monthly Charges: "))
+last_login_days = int(input("Enter Last Login Days: "))
+complaints = int(input("Enter Complaints (0 or 1): "))
+
+# -------------------------------
+# Create sample dataframe
+# -------------------------------
+sample = pd.DataFrame([{
+    "age": age,
+    "tenure": tenure,
+    "monthly_charges": monthly_charges,
+    "last_login_days": last_login_days,
+    "complaints": complaints
+}])
+
+# -------------------------------
+# Predict for single customer
+# -------------------------------
+predicted_label = model.predict(sample)[0]
+churn_probability = model.predict_proba(sample)[0][1]
+
+
+
+# -------------------------------
+# Show result in terminal
+# -------------------------------
+print("\n===== Prediction Result =====")
+print("Customer ID:", customer_id)
+print("Predicted Label:", predicted_label)
+print("Churn Probability:", round(churn_probability * 100, 2), "%")
+
+
