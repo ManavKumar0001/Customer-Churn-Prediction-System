@@ -10,7 +10,7 @@ try:
     conn = mysql.connector.connect(
         host="localhost",
         user="root",
-        password="M^1G^6V^3##&&@2897_se",
+        password="your password",
         database="customer_churn_system"
     )
 
